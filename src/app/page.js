@@ -3,7 +3,9 @@ import Box1 from "@/components/Box1";
 
 export default async function Home() {
 
-  const data = await fetch('https://api.vercel.app/blog')
+  const data = await fetch('https://api.vercel.app/blog', {
+    next: { revalidate: 10 }
+  })
   const posts = await data.json()
   const fetchedAt = new Date().toISOString();
 

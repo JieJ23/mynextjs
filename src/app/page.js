@@ -5,8 +5,9 @@ export default async function Home() {
 
   const data = await fetch('https://api.vercel.app/blog',
     {
-      next: { revalidate: 0 },
-      cache: "no-store"
+      headers: {
+        "Cache-Control": "no-store"
+      }
     }
   )
   const posts = await data.json()

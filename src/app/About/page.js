@@ -21,7 +21,7 @@ export default async function AboutPage() {
                 </div>
                 <Link href={"/"} className="font-[ubuntu] text-[20px]">Go to Home page</Link>
                 {posts.map((obj, index) => (
-                    <div className="flex gap-4">
+                    <div className="flex gap-4" key={index}>
                         <div>
                             {index}
                         </div>

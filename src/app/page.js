@@ -28,13 +28,12 @@ export default async function Home() {
 
   return (
     <div>
-      <main >
+      <main className="text-white">
         <p className="text-[14px] p-2">Data fetched at: {fetchedAt}</p>
         <Standard data={posts} />
         <Standard data={posts2} />
         <Standard data={posts3} />
         <Standard data={posts4} />
-
       </main>
     </div>
   );

@@ -24,15 +24,17 @@ export default function Standard({ data }) {
       </div>
       <div className="p-2 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-1 text-white">
         {Object.entries(classes_store).map(([ke, val], index) => (
-          <div className="flex justify-between gap-4 p-2 bg-[#131111] rounded" key={index}>
+          <div className="flex justify-between gap-4 p-2 bg-black/80 rounded" key={index}>
             <div>{ke}</div>
             <div>
               ({val}) {((val / 1000) * 100).toFixed(2)}%
             </div>
           </div>
         ))}
+      </div>
+      <div className="p-2 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-1 text-white">
         {Object.entries(classes_dead_store).map(([ke, val], index) => (
-          <div className="flex justify-between gap-4 p-2 bg-[#521111] rounded" key={index}>
+          <div className="flex justify-between gap-4 p-2 bg-[#521111]/80 rounded" key={index}>
             <div>{ke}</div>
             <div>
               ({val}) {((val / 1000) * 100).toFixed(2)}%

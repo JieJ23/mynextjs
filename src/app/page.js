@@ -28,7 +28,7 @@ export default async function Home() {
 
   return (
     <div>
-      <main className="text-white">
+      <main className="text-white font-[font]">
         <p className="text-[14px] p-2">Data fetched at: {fetchedAt}</p>
         <Standard data={posts} />
         <Standard data={posts2} />

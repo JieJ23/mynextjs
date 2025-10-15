@@ -1,9 +1,4 @@
 import "./globals.css";
-import localFont from "next/font/local"
-
-const fontin = localFont({
-  src: '../fonts/Fontin.otf'
-})
 
 export const metadata = {
   title: "Next App",
@@ -14,7 +9,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${fontin.className} antialiased`}
+        className={`antialiased`}
       >
         <>
           <div className="fixed w-full h-lvh -z-10 pointer-events-none">

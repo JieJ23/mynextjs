@@ -12,7 +12,13 @@ export default function Standard({ rawData }) {
         {sortDataByDate.map((obj, index) => (
           <div key={index} className="rounded">
             <div className="aspect-video border-1 border-[#28282b] rounded-lg">
-              <img src={`${obj.snippet.thumbnails.medium.url}`} alt="Thumbnails" className="w-full h-full rounded-lg" />
+              <a href={`https://www.youtube.com/watch?v=${obj.id}`} target="_blank">
+                <img
+                  src={`${obj.snippet.thumbnails.medium.url}`}
+                  alt="Thumbnails"
+                  className="w-full h-full rounded-lg"
+                />
+              </a>
             </div>
             <div className="px-2">
               <div className="line-clamp-2">{obj.snippet.title}</div>

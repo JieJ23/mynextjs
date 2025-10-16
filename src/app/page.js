@@ -1,39 +1,40 @@
 const revalidate = 43200;
 
+import { youtube_ids } from "@/data/YTid";
 import Standard from "@/components/Standard";
 
+const YOUTUBE_API_KEY = `AIzaSyBdA6aG9KHhqJ_cKhnHXkVzKNWsWZb2F3U`
+
+function chunkArray(array, chunkSize) {
+  const chunks = [];
+  for (let i = 0; i < array.length; i += chunkSize) {
+    chunks.push(array.slice(i, i + chunkSize));
+  }
+  return chunks;
+}
+
 export default async function Home() {
+  const chunks = chunkArray(youtube_ids, 50);
 
-  const data = await fetch('https://pathofexile2.com/internal-api/content/game-ladder/id/Rise%20of%20the%20Abyssal', {
-    next: { revalidate: 43200 }
-  })
+  const allPosts = [];
 
-  const data2 = await fetch('https://pathofexile2.com/internal-api/content/game-ladder/id/HC%20Rise%20of%20the%20Abyssal', {
-    next: { revalidate: 43200 }
-  })
+  for (const chunk of chunks) {
+    const id_strings = chunk.join(",");
+    const res = await fetch(
+      `https://www.googleapis.com/youtube/v3/videos?part=snippet,contentDetails,statistics&id=${id_strings}&key=${YOUTUBE_API_KEY}`,
+      { next: { revalidate: 43200 } }
+    );
+    const data = await res.json();
+    allPosts.push(...data.items); // merge items into allPosts
+  }
 
-  const data3 = await fetch('https://pathofexile2.com/internal-api/content/game-ladder/id/SSF%20Rise%20of%20the%20Abyssal', {
-    next: { revalidate: 43200 }
-  })
-
-  const data4 = await fetch('https://pathofexile2.com/internal-api/content/game-ladder/id/HC%20SSF%20Rise%20of%20the%20Abyssal', {
-    next: { revalidate: 43200 }
-  })
-
-  const posts = await data.json()
-  const posts2 = await data2.json()
-  const posts3 = await data3.json()
-  const posts4 = await data4.json()
   const fetchedAt = new Date().toTimeString();
 
   return (
     <div>
-      <main className="text-white font-[font]">
+      <main className="text-white">
         <p className="text-[14px] p-2">Data fetched at: {fetchedAt}</p>
-        <Standard data={posts} />
-        <Standard data={posts2} />
-        <Standard data={posts3} />
-        <Standard data={posts4} />
+        <Standard rawData={allPosts} />
       </main>
     </div>
   );

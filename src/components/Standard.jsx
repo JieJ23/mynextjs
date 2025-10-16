@@ -1,43 +1,29 @@
 "use cilent";
 
-export default function Standard({ data }) {
-  const classes_store = data.context.ladder.entries.reduce((acc, entry) => {
-    const classType = entry.character.class;
+export default function Standard({ rawData }) {
+  const sortDataByDate = rawData.sort(
+    (a, b) => new Date(b.snippet.publishedAt.slice(0, 10)) - new Date(a.snippet.publishedAt.slice(0, 10))
+  );
 
-    acc[classType] = (acc[classType] || 0) + 1;
-    return Object.fromEntries(Object.entries(acc).sort());
-  }, {});
-
-  const players_dead = data.context.ladder.entries.filter((obj) => obj.dead === true);
-  const classes_dead_store = players_dead.reduce((acc, entry) => {
-    const classType = entry.character.class;
-
-    acc[classType] = (acc[classType] || 0) + 1;
-    return Object.fromEntries(Object.entries(acc).sort());
-  }, {});
-
+  console.log(rawData[0]);
   return (
     <div className="my-4 max-w-[1400px] mx-auto">
-      <div className="p-2">
-        <div>{data.context.league.name}</div>
-        <div>{data.context.league.description}</div>
-      </div>
-      <div className="p-2 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-1 text-white">
-        {Object.entries(classes_store).map(([ke, val], index) => (
-          <div className="flex justify-between gap-4 p-2 bg-black/80 rounded" key={index}>
-            <div>{ke}</div>
-            <div>
-              ({val}) {((val / 1000) * 100).toFixed(2)}%
+      <div className="p-2 grid grid-cols-2 md:grid-cols-4 gap-2 text-[12px] md:text-[13px]">
+        {sortDataByDate.map((obj, index) => (
+          <div key={index} className="rounded">
+            <div className="aspect-video border-1 border-[#28282b] rounded-lg">
+              <img src={`${obj.snippet.thumbnails.medium.url}`} alt="Thumbnails" className="w-full h-full rounded-lg" />
             </div>
-          </div>
-        ))}
-      </div>
-      <div className="p-2 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-1 text-white">
-        {Object.entries(classes_dead_store).map(([ke, val], index) => (
-          <div className="flex justify-between gap-4 p-2 bg-[#521111]/80 rounded" key={index}>
-            <div>{ke}</div>
-            <div>
-              ({val}) {((val / 1000) * 100).toFixed(2)}%
+            <div className="px-2">
+              <div className="line-clamp-2">{obj.snippet.title}</div>
+              <div className="flex justify-between">
+                <div>{obj.snippet.channelTitle}</div>
+                <div>Like: {obj.statistics.likeCount}</div>
+              </div>
+              <div className="flex justify-between">
+                <div>{obj.snippet.publishedAt.slice(0, 10)}</div>
+                <div>View: {obj.statistics.viewCount}</div>
+              </div>
             </div>
           </div>
         ))}

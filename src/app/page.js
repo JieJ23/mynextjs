@@ -1,3 +1,5 @@
+import Standard from "@/components/Standard";
+
 export default async function Home() {
 
   const res = await fetch(
@@ -9,13 +11,7 @@ export default async function Home() {
   return (
     <div>
       <main className="text-white">
-        <div>
-          {data.map((obj, index) => (
-            <div key={index}>
-              {obj.nam} - {index} - {obj.asp}
-            </div>
-          ))}
-        </div>
+        <Standard data={data} />
       </main>
     </div>
   );

@@ -12,7 +12,7 @@ export default async function Home() {
         <div>
           {data.map((obj, index) => (
             <div key={index}>
-              {obj.nam} - {index}
+              {obj.nam} - {index} - {obj.asp}
             </div>
           ))}
         </div>

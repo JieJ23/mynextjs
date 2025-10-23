@@ -1,7 +1,7 @@
 export default async function Home() {
 
   const res = await fetch(
-    `https://script.google.com/macros/s/AKfycbw1iX5AdD32YcXYohQLAgEx3SDPTsH3V41RGCGts2bNk3-yYfSlEpZgufNt-G60gc7t/exec`
+    `https://script.google.com/macros/s/AKfycbw1iX5AdD32YcXYohQLAgEx3SDPTsH3V41RGCGts2bNk3-yYfSlEpZgufNt-G60gc7t/exec`, { cache: 'no-store' }
   );
   const data = await res.json();
 

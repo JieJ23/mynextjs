@@ -1,3 +1,5 @@
+export const revalidate = 30
+
 import Standard from "@/components/Standard";
 
 export default async function Home() {
